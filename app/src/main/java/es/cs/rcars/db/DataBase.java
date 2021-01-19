@@ -58,7 +58,6 @@ public class DataBase extends SQLiteOpenHelper {
                 null
         );
 
-        //return c.getCount() > 0;
         return c;
     }
 
