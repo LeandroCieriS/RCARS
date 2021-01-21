@@ -43,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-        Objects.requireNonNull(getSupportActionBar()).hide();
 
         initializeViewComponents();
         showLogo();
@@ -59,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 //            }
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            return;
         }
         loginFailed();
     }
