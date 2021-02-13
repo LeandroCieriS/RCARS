@@ -3,7 +3,6 @@ package es.cs.rcars;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -14,12 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_activity);
 
         initializeViewComponents();
-        showLogo();
+        showLogoAndAnimations();
     }
 
     private void validateLogIn(String email, String password){
@@ -56,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 //                Toast.makeText(this, "Bienvenido " + email, Toast.LENGTH_SHORT).show();
 //                return;
 //            }
+            password_tv.setText("");
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             return;
@@ -92,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
         user_tv.setOnClickListener(v -> failedLogin_tv.setVisibility(View.GONE));
     }
 
-    private void showLogo() {
+    private void showLogoAndAnimations() {
         new Handler().postDelayed(() -> {
 
             ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(mainLogo, "scaleX", 0.7f);
