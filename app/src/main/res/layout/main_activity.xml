@@ -315,7 +315,7 @@
                     android:id="@+id/textFixed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/single_item_main_menu_bg"
+                    android:background="@drawable/single_item_main_menu_bg_no_shadow"
                     android:padding="5dp"
                     android:text=" CAMBIA TU COCHE "
                     android:textColor="@color/black"
@@ -325,7 +325,8 @@
                     app:layout_constraintHorizontal_bias="1"
                     app:layout_constraintStart_toEndOf="@+id/icon"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0" />
+                    app:layout_constraintVertical_bias="0"
+                    />
 
                 <TextView
                     android:id="@+id/textFinalWide"
