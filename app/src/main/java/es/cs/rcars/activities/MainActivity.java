@@ -1,4 +1,4 @@
-package es.cs.rcars;
+package es.cs.rcars.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -8,11 +8,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
+import es.cs.rcars.R;
+
 public class MainActivity extends AppCompatActivity {
 
     private ConstraintLayout btnWide;
     private LinearLayout btnOffices;
     private LinearLayout btnWorkshops;
+    private LinearLayout btnVehicles;
     private final String urlRCars ="https://rcarscanarias.com/vehiculos-premium-generales/";
 
     @Override
@@ -24,13 +27,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeViewComponents() {
+        initializeButtons();
+    }
+
+    private void initializeButtons() {
         btnWide = findViewById(R.id.itemFinalWide);
-        btnOffices = findViewById(R.id.item6);
-        btnWorkshops = findViewById(R.id.item5);
+        btnOffices = findViewById(R.id.itemOffices);
+        btnWorkshops = findViewById(R.id.itemWorkshop);
+        btnVehicles = findViewById(R.id.itemVehicles);
 
         btnWorkshops.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MapsActivity.class);
             intent.putExtra("Show","Workshops");
+            startActivity(intent);
+        });
+
+        btnVehicles.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, VehiclesActivity.class);
+            intent.putExtra("Show","Vehicles");
             startActivity(intent);
         });
 

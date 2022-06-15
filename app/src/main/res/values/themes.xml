@@ -15,4 +15,13 @@
 
         <item name="android:fontFamily">@font/inter_v</item>
     </style>
+
+    <style name="Theme.RCARS.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.RCARS.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.RCARS.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -1,4 +1,4 @@
-package es.cs.rcars;
+package es.cs.rcars.activities;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -20,7 +20,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import es.cs.rcars.db.DataBase;
+//import es.cs.rcars.db.DataBase;
+import es.cs.rcars.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView failedLogin_tv;
     private ImageView mainLogo;
     private ConstraintLayout mainLayout;
-    private DataBase dataBase;
+    //private DataBase dataBase;
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -40,13 +41,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-
         initializeViewComponents();
         showLogoAndAnimations();
     }
 
-    private void validateLogIn(String email, String password){
-        if(validateEmailAndPass(email, password)) {
+    private void validateLogIn(String email, String password) {
+        if (validateEmailAndPass(email, password)) {
             //TODO acceder base de datos
 //            Cursor c = dataBase.checkLogin(email, password);
 //            if (c.getCount() == 1 && c.moveToFirst()) {
@@ -69,12 +69,13 @@ public class LoginActivity extends AppCompatActivity {
     public static boolean validateEmailAndPass(String emailStr, String passwordStr) {
         Matcher matcherEmail = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         Matcher matcherPass = VALID_PASSWORD_REGEX.matcher(passwordStr);
-        return matcherEmail.find() && matcherPass.find();
+//        return matcherEmail.find() && matcherPass.find();
+        return true;
     }
 
 
     private void initializeViewComponents() {
-        dataBase = new DataBase(LoginActivity.this);
+        //dataBase = new DataBase(LoginActivity.this);
 
         mainLayout = findViewById(R.id.constraintLayout);
         register_button = findViewById(R.id.registerButton);
@@ -117,5 +118,4 @@ public class LoginActivity extends AppCompatActivity {
             mainLayout.startAnimation(fadeIn);
         }, 3500); //time it takes to the logo to disappear
     }
-
 }
