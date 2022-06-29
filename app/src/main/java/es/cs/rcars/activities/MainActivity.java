@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private void initializeButtons() {
         btnWide = findViewById(R.id.itemFinalWide);
         btnOffices = findViewById(R.id.itemOffices);
-        btnWorkshops = findViewById(R.id.itemWorkshop);
         btnVehicles = findViewById(R.id.itemVehicles);
+        btnWorkshops = findViewById(R.id.itemWorkshop);
 
         btnWorkshops.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MapsActivity.class);

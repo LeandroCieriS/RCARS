@@ -13,6 +13,8 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface APIService {
+
     @GET("vehicles")
     Call<ArrayList<Vehicle>> getVehicles();
+
 }

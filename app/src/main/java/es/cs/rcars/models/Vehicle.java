@@ -1,10 +1,15 @@
 package es.cs.rcars.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Currency;
 import java.util.Date;
 
 public class Vehicle {
+    @SerializedName("numberPlate")
     private String NumberPlate;
+    @SerializedName("make")
     private String Make;
     private String Model;
     private int Year;

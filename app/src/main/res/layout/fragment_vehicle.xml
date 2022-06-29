@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.VehicleFragment">
+
+    <LinearLayout
+        android:id="@+id/itemVehicles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="7.5dp"
+        android:background="@drawable/single_item_main_menu_bg">
+
+        <ImageView
+            android:id="@+id/brandLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:contentDescription="carLogo"
+            android:src="@drawable/mercedes_benz" />
+
+        <LinearLayout
+            android:id="@+id/VehicleInfo"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginVertical="7.5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/make"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mercedes Benz"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/model"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLA 200d"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

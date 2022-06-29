@@ -18,7 +18,7 @@ public class APIAdapter {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(logging);
 
-        String baseUrl = "https://rcarsapi.azure-api.net/";
+        String baseUrl = "https://127.0.0.1:7268/";
 
         if (API_SERVICE == null) {
             Retrofit retrofit = new Retrofit.Builder()
