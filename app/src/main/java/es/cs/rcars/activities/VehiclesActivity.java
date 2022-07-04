@@ -1,31 +1,23 @@
 package es.cs.rcars.activities;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import es.cs.rcars.R;
-import es.cs.rcars.fragments.VehicleFragment;
+import es.cs.rcars.helpers.VehicleItemAdapter;
 import es.cs.rcars.io.APIAdapter;
 import es.cs.rcars.models.Vehicle;
 import retrofit2.Call;
@@ -34,6 +26,8 @@ import retrofit2.Response;
 
 public class VehiclesActivity extends AppCompatActivity implements Callback<ArrayList<Vehicle>> {
 
+    List<Vehicle> vehicleList;
+    RecyclerView recycler;
     private Call<ArrayList<Vehicle>> call;
 
     @Override
@@ -43,6 +37,10 @@ public class VehiclesActivity extends AppCompatActivity implements Callback<Arra
         initializeViewComponents();
         call = APIAdapter.getApiService().getVehicles();
         call.enqueue(this);
+
+        recycler = findViewById(R.id.recyclerView);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     private void initializeViewComponents() {
@@ -50,18 +48,16 @@ public class VehiclesActivity extends AppCompatActivity implements Callback<Arra
 
     @Override
     public void onResponse(@NotNull Call<ArrayList<Vehicle>> call, Response<ArrayList<Vehicle>> response) {
-        for (Vehicle v : response.body()) {
-        }
+        vehicleList = response.body();
+        VehicleItemAdapter adapter = new VehicleItemAdapter(vehicleList);
+        recycler.setAdapter(adapter);
     }
 
     @Override
     public void onFailure(@NotNull Call<ArrayList<Vehicle>> call, @NotNull Throwable t) {
-        List<Vehicle> vehicles = getTestJsonConverted();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        for (Vehicle v : vehicles) {
-            ft.add(R.id.layoutBodyVehicles, VehicleFragment.newInstance(v));
-        }
-        ft.commit();
+        vehicleList = getTestJsonConverted();
+        VehicleItemAdapter adapter = new VehicleItemAdapter(vehicleList);
+        recycler.setAdapter(adapter);
     }
 
     @NotNull
