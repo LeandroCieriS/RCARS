@@ -1,52 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemVehicles"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginHorizontal="0dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/single_item_main_menu_bg"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent">
 
+    <ImageView
+        android:id="@+id/brandLogo"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_weight="0.3"
+        android:contentDescription="@string/brandLogo" />
+
     <LinearLayout
-        android:id="@+id/itemVehicles"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/VehicleInfo"
+        android:layout_weight="0.7"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:gravity="center_vertical"
         android:layout_marginVertical="7.5dp"
-        android:background="@drawable/single_item_main_menu_bg"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/brandLogo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="20dp"
-            android:contentDescription="carLogo"
-            android:src="@drawable/subaru" />
+        <TextView
+            android:id="@+id/make"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
 
-        <LinearLayout
-            android:id="@+id/VehicleInfo"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginVertical="7.5dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/make"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mercedes Benz"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/model"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CLA 200d"
-                android:textSize="25sp" />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp" />
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
