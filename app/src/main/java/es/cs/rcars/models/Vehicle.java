@@ -25,6 +25,7 @@ public class Vehicle {
     private String TitleOwner;
     private Currency SellingPrice;
     private Currency PurchasePrice;
+//    @SerializedName("purchaseDate")
     private Date PurchaseDate;
     @SerializedName("secondKey")
     private boolean SecondKey;

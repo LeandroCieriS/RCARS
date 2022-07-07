@@ -14,4 +14,9 @@
     <string name="brandLogo">BrandLogo</string>
     <string name="carIcon">carIcon</string>
     <string name="my_vehicles">MIS VEHÍCULOS</string>
+    <string name="yearLbl">Año:</string>
+    <string name="fuelLbl">Combustible:</string>
+    <string name="plateLbl">Matrícula:</string>
+    <string name="transmissionLbl">Transmisión:</string>
+    <string name="purchaseDateLbl">Fecha de compra:</string>
 </resources>
