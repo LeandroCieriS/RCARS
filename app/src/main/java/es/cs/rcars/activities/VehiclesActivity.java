@@ -1,15 +1,13 @@
 package es.cs.rcars.activities;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
@@ -28,37 +26,34 @@ import retrofit2.Response;
 
 public class VehiclesActivity extends AppCompatActivity implements Callback<ArrayList<Vehicle>> {
 
-    List<Vehicle> vehicleList;
     RecyclerView recycler;
-    private Call<ArrayList<Vehicle>> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(es.cs.rcars.R.layout.activity_vehicles);
         initializeViewComponents();
-        call = APIAdapter.getApiService().getVehicles();
+        Call<ArrayList<Vehicle>> call = APIAdapter.getApiService().getVehicles();
         call.enqueue(this);
-
-        recycler = findViewById(R.id.recyclerView);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
     private void initializeViewComponents() {
+        recycler = findViewById(R.id.recyclerView);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
     public void onResponse(@NotNull Call<ArrayList<Vehicle>> call, Response<ArrayList<Vehicle>> response) {
-        vehicleList = response.body();
-        VehicleItemAdapter adapter = new VehicleItemAdapter(vehicleList);
-        recycler.setAdapter(adapter);
+        SetRecyclerAdapter(response.body());
     }
 
     @Override
     public void onFailure(@NotNull Call<ArrayList<Vehicle>> call, @NotNull Throwable t) {
-        vehicleList = getTestJsonConverted();
-        VehicleItemAdapter adapter = new VehicleItemAdapter(vehicleList);
+        SetRecyclerAdapter(getTestJsonConverted());
+    }
+
+    private void SetRecyclerAdapter(List<Vehicle> body) {
+        VehicleItemAdapter adapter = new VehicleItemAdapter(body);
         recycler.setAdapter(adapter);
     }
 
@@ -107,6 +102,7 @@ public class VehiclesActivity extends AppCompatActivity implements Callback<Arra
                 "  }\n" +
                 "]";
         Type collectionType = new TypeToken<List<Vehicle>>(){}.getType();
-        return new Gson().fromJson(testJson, collectionType);
+        Gson gson=  new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+        return gson.fromJson(testJson, collectionType);
     }
 }

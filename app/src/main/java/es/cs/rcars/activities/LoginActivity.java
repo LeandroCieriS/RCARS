@@ -17,20 +17,33 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 //import es.cs.rcars.db.DataBase;
 import es.cs.rcars.R;
+import es.cs.rcars.io.APIAdapter;
+import es.cs.rcars.models.Customer;
+import es.cs.rcars.models.Dealer;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity{
 
     private EditText user_tv, password_tv;
-    private Button login_button, register_button;
     private TextView failedLogin_tv;
     private ImageView mainLogo;
     private ConstraintLayout mainLayout;
-    //private DataBase dataBase;
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -47,14 +60,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private void validateLogIn(String email, String password) {
         if (validateEmailAndPass(email, password)) {
-            //TODO acceder base de datos
 //            Cursor c = dataBase.checkLogin(email, password);
 //            if (c.getCount() == 1 && c.moveToFirst()) {
 //                Toast.makeText(this, "Bienvenido " + email, Toast.LENGTH_SHORT).show();
 //                return;
 //            }
             password_tv.setText("");
+
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("UserId", user_tv.getText());
             startActivity(intent);
             return;
         }
@@ -75,13 +89,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void initializeViewComponents() {
-        //dataBase = new DataBase(LoginActivity.this);
-
         mainLayout = findViewById(R.id.constraintLayout);
-        register_button = findViewById(R.id.registerButton);
+        Button register_button = findViewById(R.id.registerButton);
         failedLogin_tv = findViewById(R.id.tv_loginfailed);
         password_tv = findViewById(R.id.editTextPassword);
-        login_button = findViewById(R.id.loginButton);
+        Button login_button = findViewById(R.id.loginButton);
         user_tv = findViewById(R.id.editTextUser);
         mainLogo = findViewById(R.id.iv_mainlogo);
 

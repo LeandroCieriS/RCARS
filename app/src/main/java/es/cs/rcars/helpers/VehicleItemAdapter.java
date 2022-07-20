@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -50,19 +51,11 @@ public class VehicleItemAdapter extends RecyclerView.Adapter<VehicleItemAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
-        LinearLayout container;
-        LinearLayout containerDetails;
-        TextView makeLabel;
-        TextView modelLabel;
-        TextView yearLabel;
-        TextView fuelLabel;
-        TextView plateLabel;
-        TextView TransmissionLabel;
-        TextView purchaseLabel;
+        LinearLayout container, containerDetails;
+        TextView makeLabel, modelLabel, nextInspectionLabel, fuelLabel, plateLabel, yearLabel;
+        TextView TransmissionLabel, purchaseLabel, inspectionLabel, secondKeyLabel, manualLabel;
         ImageView logoView;
         Map<String, String> fuelMap;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,6 +74,10 @@ public class VehicleItemAdapter extends RecyclerView.Adapter<VehicleItemAdapter.
             plateLabel = itemView.findViewById(R.id.plateData);
             TransmissionLabel = itemView.findViewById(R.id.transmissionData);
             purchaseLabel = itemView.findViewById(R.id.purchaseDateData);
+            inspectionLabel = itemView.findViewById(R.id.inspectionDateData);
+            nextInspectionLabel = itemView.findViewById(R.id.nextInspectionDateData);
+            secondKeyLabel = itemView.findViewById(R.id.secondKeyData);
+            manualLabel = itemView.findViewById(R.id.manualData);
         }
 
         public void LinkItems(Vehicle vehicle) {
@@ -89,11 +86,23 @@ public class VehicleItemAdapter extends RecyclerView.Adapter<VehicleItemAdapter.
             yearLabel.setText(String.valueOf(vehicle.getYear()));
             fuelLabel.setText(fuelMap.get(vehicle.getFuel()));
             plateLabel.setText(vehicle.getNumberPlate());
-            TransmissionLabel.setText(vehicle.getTransmission());
-//            purchaseLabel.setText(vehicle.getPurchaseDate());
+            String transmission = vehicle.getTransmission().equals("A") ? "Automático" : "Manual";
+            TransmissionLabel.setText(transmission);
+            purchaseLabel.setText(ConvertDate(vehicle.getPurchaseDate()));
+            inspectionLabel.setText(ConvertDate(vehicle.getInspectionDate()));
+            nextInspectionLabel.setText(getNextInspectionDate(vehicle));
+            secondKeyLabel.setText(vehicle.hasSecondKey() ? "SI" : "NO");
+            manualLabel.setText(vehicle.hasManual() ? "SI" : "NO");
             SetLogoImage(vehicle);
 
-            container.setOnClickListener(v -> containerDetails.setVisibility(AlternateVisibility(containerDetails)));
+            container.setOnClickListener(v -> AlternateVisibility(containerDetails));
+        }
+
+        private String getNextInspectionDate(Vehicle vehicle) {
+            Calendar c = Calendar.getInstance();
+            c.setTime(vehicle.getInspectionDate());
+            c.add(Calendar.YEAR, 1);
+            return ConvertDate(c.getTime());
         }
 
         private String ConvertDate(Date date) {
@@ -118,8 +127,8 @@ public class VehicleItemAdapter extends RecyclerView.Adapter<VehicleItemAdapter.
             fuelMap.put("HDR", "Hidrógeno");
         }
 
-        private int AlternateVisibility(LinearLayout containerDetails) {
-            return containerDetails.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE;
+        private void AlternateVisibility(LinearLayout containerDetails) {
+            containerDetails.setVisibility(containerDetails.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
         }
     }
 }

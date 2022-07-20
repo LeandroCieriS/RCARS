@@ -20,12 +20,13 @@ public class Vehicle {
     private String Fuel;
     @SerializedName("transmission")
     private String Transmission;
+    @SerializedName("inspectionDate")
     private Date InspectionDate;
     @SerializedName("titleOwner")
     private String TitleOwner;
     private Currency SellingPrice;
     private Currency PurchasePrice;
-//    @SerializedName("purchaseDate")
+    @SerializedName("purchaseDate")
     private Date PurchaseDate;
     @SerializedName("secondKey")
     private boolean SecondKey;
@@ -132,7 +133,7 @@ public class Vehicle {
         PurchaseDate = purchaseDate;
     }
 
-    public boolean isSecondKey() {
+    public boolean hasSecondKey() {
         return SecondKey;
     }
 
@@ -140,7 +141,7 @@ public class Vehicle {
         SecondKey = secondKey;
     }
 
-    public boolean isManual() {
+    public boolean hasManual() {
         return Manual;
     }
 
